@@ -60,15 +60,11 @@ func createEvent(srv *calendar.Service) (*calendar.Event, error) {
 		Start:       &calendar.EventDateTime{Date: "2023-09-07"},
 		End:         &calendar.EventDateTime{Date: "2023-09-08"},
 		Attendees: []*calendar.EventAttendee{
-			// {Email: "asterpoc001@gmail.com"},
-			// {Email: "lectival857@gmail.com"},
-			// {Email: "jirayu.s@arise.tech"},
-			{Email: "thanakorn.s@arise.tech"},
+			{Email: "example001@gmail.com"},
 		},
 	}
-	//c_1d6f51b32a846286b494e7f5ae5b83fa0d3abe7509f95e72f69e267e13f88e44@group.calendar.google.com
 
-	newEvent, err := srv.Events.Insert("c_1d6f51b32a846286b494e7f5ae5b83fa0d3abe7509f95e72f69e267e13f88e44@group.calendar.google.com", event).SendUpdates("all").Do()
+	newEvent, err := srv.Events.Insert("primary", event).SendUpdates("all").Do()
 	if err != nil {
 		return nil, err
 	}
@@ -103,8 +99,7 @@ func readEvent(srv *calendar.Service, eventId string) (*calendar.Event, error) {
 }
 
 func updateEvent(srv *calendar.Service, eventId string, event *calendar.Event) (*calendar.Event, error) {
-	// return srv.Events.Update("primary", eventId, event).SendUpdates("all").Do()
-	return srv.Events.Update("c_1d6f51b32a846286b494e7f5ae5b83fa0d3abe7509f95e72f69e267e13f88e44@group.calendar.google.com", eventId, event).SendUpdates("all").Do()
+	return srv.Events.Update("primary", eventId, event).SendUpdates("all").Do()
 }
 
 func inviteAttendees(srv *calendar.Service, eventId string, newAttendees []*calendar.EventAttendee) (*calendar.Event, error) {
@@ -178,11 +173,7 @@ func main() {
 	// fmt.Printf("Event created: %s\n", newEvent.HtmlLink)
 
 	moreAttendees := []*calendar.EventAttendee{
-		// {Email: "jirayu.s@arise.tech"},
-		// {Email: "thanakorn.s@arise.tech"},
-		// {Email: "vongsathon.p@arise.tech"},
-		// {Email: "thanakorn.sutad@gmail.com"},
-		{Email: "lectival857@gmail.com"},
+		{Email: "example001@gmail.com"},
 	}
 
 	updatedEvent, err := inviteAttendees(srv, "pqgi1et8sb7pstt6j035vf34gc", moreAttendees)
